@@ -1,0 +1,574 @@
+[
+  {
+    "category": "distribution",
+    "categoryDescriptionTR": "Sayısal değişkenlerin veya gruplar arası dağılımın gösterildiği grafikler.",
+    "charts": [
+      {
+        "chartType": "histogram",
+        "descriptionTR": "Sayısal bir değişkenin dağılımını binlere bölerek gösterir. Çubuğun yüksekliği bin başına düşen gözlem sayısını temsil eder.",
+        "suitableDataTR": "Sadece sayısal değişkenler. Birden fazla değişkenin dağılımını göstermek mümkündür.",
+        "suitableDataSchema": {
+          "numericColumns": ">= 1",
+          "categoricalColumns": ">= 0",
+          "datetimeColumns": ">= 0"
+        },
+        "pythonScriptSuggestion": "histogram.py",
+        "commonUseCasesTR": "Dağılımın şeklini, çarpıklığını, yoğunluk bölgelerini ve aykırı değerleri incelemek.",
+        "caveatsTR": [
+          "Bin boyutuyla oynamak, farklı içgörülere yol açabilir.",
+          "Dağılımı 5'ten fazla değişken için göstermekten kaçınılmalıdır, bunun yerine violin veya ridgeline plot kullanılmalıdır.",
+          "Renk paletleriyle doldurmaktan kaçınılmalıdır."
+        ]
+      },
+      {
+        "chartType": "density",
+        "descriptionTR": "Sayısal bir değişkenin dağılımını gösterir. Histogramdan çok yakındır ve aynı koşullarda kullanılabilir.",
+        "suitableDataTR": "Tek bir sayısal kolon (dağılımını görmek istediğiniz nicel değişken).",
+        "suitableDataSchema": {
+          "numericColumns": ">= 1",
+          "categoricalColumns": ">= 0",
+          "datetimeColumns": ">= 0"
+        },
+        "pythonScriptSuggestion": "density.py",
+        "commonUseCasesTR": "Dağılımın şeklini histogramdan daha pürüzsüz (sürekli eğri) görmek.",
+        "caveatsTR": [
+          "Yoğunluk fonksiyonunun bant genişliği (bandwidth) ile oynanmalıdır.",
+          "Dağılımı 5'ten fazla değişken için göstermekten kaçınılmalıdır. Bunun yerine Violin veya Ridgeline plot kullanılmalıdır.",
+          "Renk paletleriyle doldurmaktan kaçınılmalıdır."
+        ]
+      },
+      {
+        "chartType": "boxplot",
+        "descriptionTR": "Bir veya birden fazla sayısal değişkenin dağılımını özetler. Ortanca (median), çeyreklikler (quartiles) ve aykırı değerleri gösterir.",
+        "suitableDataTR": "Sayısal değişkenler. Gruplar arası karşılaştırma yapılabilir.",
+        "suitableDataSchema": {
+          "numericColumns": ">= 1",
+          "categoricalColumns": ">= 0",
+          "datetimeColumns": ">= 0"
+        },
+        "pythonScriptSuggestion": "boxplot.py",
+        "commonUseCasesTR": "Dağılımın hızlı bir özetini çıkarmak ve grupları karşılaştırmak.",
+        "caveatsTR": [
+          "Kutu grafiği, her grubun örneklem boyutunu gizler; bunu gösterge veya kutu genişliği ile belirtin.",
+          "Temel dağılımı gizler. Az sayıda veri noktası varsa jitter, büyük veri varsa violin plot kullanılmalıdır.",
+          "Kutu grafiği, medyana göre sıralanarak daha anlamlı hale getirilebilir."
+        ]
+      },
+      {
+        "chartType": "violin_plot",
+        "descriptionTR": "Bir veya birden fazla grup için sayısal bir değişkenin dağılımını görselleştirir. Kutu grafiğine bir alternatiftir ve dağılımın daha derin anlaşılmasını sağlar.",
+        "suitableDataTR": "Çok sayıda veri noktası (huge amount of data) içeren bir veya birden fazla grup için sayısal değişken.",
+        "suitableDataSchema": {
+          "numericColumns": ">= 1",
+          "categoricalColumns": ">= 1",
+          "datetimeColumns": ">= 0"
+        },
+        "pythonScriptSuggestion": "violin.py",
+        "commonUseCasesTR": "Dağılımları karşılaştırmak, özellikle veri miktarı çok büyükse.",
+        "caveatsTR": [
+          "Az sayıda grup varsa, ridgeline chart'lar daha uygun olabilir.",
+          "Grupların medyan değere göre sıralanması çizelgeyi daha anlamlı hale getirir.",
+          "Çok farklı örneklem boyutlarına sahip grupları karşılaştırıyorsanız, bu boyutu gösterin."
+        ]
+      }
+    ]
+  },
+  {
+    "category": "correlation",
+    "categoryDescriptionTR": "İki veya daha fazla sayısal değişken arasındaki ilişkiyi gösteren grafikler.",
+    "charts": [
+      {
+        "chartType": "scatter_plot",
+        "descriptionTR": "İki sayısal değişken arasındaki ilişkiyi noktalarla gösterir. Birinci değişken X, ikincisi Y ekseninde temsil edilir.",
+        "suitableDataTR": "En az iki sayısal kolon (X ve Y).",
+        "suitableDataSchema": {
+          "numericColumns": ">= 2",
+          "categoricalColumns": ">= 0",
+          "datetimeColumns": ">= 0"
+        },
+        "pythonScriptSuggestion": "scatter.py",
+        "commonUseCasesTR": "Korelasyon, trend, kümelenme ve aykırı değer tespiti.",
+        "caveatsTR": [
+          "Örneklem boyutu yüksek olduğunda overplotting (noktaların üst üste binmesi) en yaygın hatadır. Bundan kaçınmak için teknikler mevcuttur.",
+          "Alt gruplarınız varsa bunları göstermeyi unutmayın."
+        ]
+      },
+      {
+        "chartType": "heatmap",
+        "descriptionTR": "Bir matristeki bireysel değerlerin renk olarak temsil edildiği grafiksel gösterim. Bir veri tablosuna yukarıdan bakmaya benzer.",
+        "suitableDataTR": "Matris yapısında sayısal veriler (İki kategorik veya matris).",
+        "suitableDataSchema": {
+          "numericColumns": ">= 1",
+          "categoricalColumns": ">= 2"
+        },
+        "pythonScriptSuggestion": "heatmap.py",
+        "commonUseCasesTR": "Sayısal verilere genel bir bakış elde etmek.",
+        "caveatsTR": [
+          "Verilerinizi normalleştirmeniz sıklıkla gerekir.",
+          "Benzer değerleri birbirine yakınlaştırmak için kümeleme analizi ve satır/sütunların yeniden düzenlenmesi önerilir.",
+          "Renk paleti seçimi önemlidir."
+        ]
+      },
+      {
+        "chartType": "correlogram",
+        "descriptionTR": "Bir matristeki her sayısal değişken çifti arasındaki ilişkiyi (korelasyon matrisi) analiz etmeye olanak tanır.",
+        "suitableDataTR": "Birden fazla sayısal değişken içeren matris.",
+        "suitableDataSchema": {
+          "numericColumns": ">= 2",
+          "categoricalColumns": ">= 0",
+          "datetimeColumns": ">= 0"
+        },
+        "pythonScriptSuggestion": "correlogram.py",
+        "commonUseCasesTR": "Veri setindeki tüm sayısal değişken çiftleri arasındaki ilişkiyi görselleştirmek.",
+        "caveatsTR": [
+          "İlişkinin 10'dan fazla değişken arasında gösterilmesi, çizimi okunması çok zor hale getirir."
+        ]
+      },
+      {
+        "chartType": "bubble_plot",
+        "descriptionTR": "Üçüncü bir boyutun (ek bir sayısal değişkenin değeri) noktaların boyutu aracılığıyla eklendiği bir scatter plot'tır.",
+        "suitableDataTR": "Üç sayısal değişken (X ekseni, Y ekseni ve Nokta Boyutu).",
+        "suitableDataSchema": {
+          "numericColumns": ">= 3",
+          "categoricalColumns": ">= 0",
+          "datetimeColumns": ">= 0"
+        },
+        "pythonScriptSuggestion": "bubble.py",
+        "commonUseCasesTR": "Üç boyutlu ilişkinin görselleştirilmesi.",
+        "caveatsTR": [
+          "Metrik olarak kabarcık çapı yerine kabarcık alanı (area) kullanılmalıdır.",
+          "Scatter plot'ta olduğu gibi, örneklem boyutu çok büyükse overplotting oluşur.",
+          "Kabarcık boyutu için bir gösterge (legend) gösterilmelidir."
+        ]
+      },
+      {
+        "chartType": "connected_scatter",
+        "descriptionTR": "Bir scatter plot gibi iki değişken arasındaki ilişkiyi gösterir, ancak noktalar bir çizgi grafiği gibi segmentlerle birbirine bağlanır.",
+        "suitableDataTR": "İki sayısal değişken, genellikle sıralı bir eksene (çoğunlukla zaman) sahip veri.",
+        "suitableDataSchema": {
+          "numericColumns": "2",
+          "categoricalColumns": ">= 0",
+          "datetimeColumns": ">= 0"
+        },
+        "pythonScriptSuggestion": "connected_scatter.py",
+        "commonUseCasesTR": "İki değişkenin sıralı (zamansal olmayan) bir süreç boyunca nasıl birlikte değiştiğini göstermek.",
+        "caveatsTR": [
+          "Çift eksen (dual axis) kullanılmamalıdır.",
+          "Örneklem boyutu çok büyükse overplotting riskine dikkat edilmelidir."
+        ]
+      },
+      {
+        "chartType": "density_2d",
+        "descriptionTR": "İki nicel değişken aralığındaki değerlerin dağılımını 2 boyutlu olarak gösterir. Belirli bir 2D alandaki gözlem sayısını sayar ve bunu renk veya yoğunluk tahmini ile temsil eder.",
+        "suitableDataTR": "Çok sayıda (huge) gözleme sahip iki nicel değişken.",
+        "suitableDataSchema": {
+          "numericColumns": "2",
+          "categoricalColumns": ">= 0",
+          "datetimeColumns": ">= 0"
+        },
+        "pythonScriptSuggestion": "density_2d.py",
+        "commonUseCasesTR": "Çok büyük örneklem boyutuna sahip scatter plot'larda overplotting'i önlemek ve yoğunluk bölgelerini göstermek.",
+        "caveatsTR": [
+          "Yalnızca örneklem boyutu çok büyükse kullanışlıdır.",
+          "Bin boyutu/bant genişliği ile oynanmalıdır.",
+          "İyi bir renk paleti seçilmelidir."
+        ]
+      }
+    ]
+  },
+  {
+    "category": "ranking",
+    "categoryDescriptionTR": "Kategorik varlıkların değerlerini karşılaştırmak ve birden fazla özelliği kıyaslamak için kullanılır.",
+    "charts": [
+      {
+        "chartType": "barplot",
+        "descriptionTR": "Sayısal ve kategorik bir değişken arasındaki ilişkiyi gösterir. Her kategorik varlık, boyutu sayısal değeri temsil eden bir çubuk olarak gösterilir.",
+        "suitableDataTR": "Bir kategorik ve bir sayısal değişken.",
+        "suitableDataSchema": {
+          "numericColumns": "1",
+          "categoricalColumns": "1",
+          "datetimeColumns": ">= 0"
+        },
+        "pythonScriptSuggestion": "barplot.py",
+        "commonUseCasesTR": "Kategorik değerlerin kıyaslanması.",
+        "caveatsTR": [
+          "Histogram ile karıştırılmamalıdır.",
+          "Uzun etiketler varsa, yatay bir versiyon düşünülmelidir.",
+          "Çubukların sıralanması genellikle içgörü katar."
+        ]
+      },
+      {
+        "chartType": "lollipop",
+        "descriptionTR": "Bir çubuğun çizgiye ve noktaya dönüştürüldüğü, temelde süslü bir barplot'tur. Sayısal ve kategorik ilişkiyi gösterir.",
+        "suitableDataTR": "Bir kategorik ve bir sayısal değişken.",
+        "suitableDataSchema": {
+          "numericColumns": "1",
+          "categoricalColumns": "1",
+          "datetimeColumns": ">= 0"
+        },
+        "pythonScriptSuggestion": "lollipop.py",
+        "commonUseCasesTR": "Barplot'tan daha çekici bir sunum sağlamak ve özellikle çubukların yüksekliği aynı olduğunda karışıklığı önlemek.",
+        "caveatsTR": [
+          "Örnekler sıralanmalıdır, aksi takdirde barplot daha okunabilir olabilir.",
+          "Yatay bir versiyon, etiketlerin daha kolay okunmasını sağlar."
+        ]
+      },
+      {
+        "chartType": "spider_radar_chart",
+        "descriptionTR": "Birden fazla ortak nicel değişken üzerinde bir veya daha fazla değer serisini çizmeyi amaçlayan iki boyutlu bir grafiktir. Tüm eksenler merkezde birleşir.",
+        "suitableDataTR": "Birden fazla nicel değişken içeren ve gruplar arasında karşılaştırma yapılabilen veri.",
+        "suitableDataSchema": {
+          "numericColumns": ">= 3",
+          "categoricalColumns": ">= 1",
+          "datetimeColumns": ">= 0"
+        },
+        "pythonScriptSuggestion": "spider.py",
+        "commonUseCasesTR": "Özellikler (değişkenler) bazında birden fazla grubu karşılaştırmak.",
+        "caveatsTR": [
+          "Aynı grafikte 5'ten fazla grup görüntülenmemelidir, faceting kullanılmalıdır.",
+          "Farklı ölçekli değişkenler kullanılıyorsa dikkatli olunmalıdır; en azından her ölçekteki değerler gösterilmelidir."
+        ]
+      },
+      {
+        "chartType": "parallel_coordinates",
+        "descriptionTR": "Birden fazla sayısal değişken kümesi üzerindeki bireysel gözlemlerin özelliklerini karşılaştırmaya olanak tanır. Her dikey çubuk bir değişkeni temsil eder.",
+        "suitableDataTR": "Birden fazla sayısal değişken ve bireysel gözlemler.",
+        "suitableDataSchema": {
+          "numericColumns": ">= 3",
+          "categoricalColumns": ">= 0",
+          "datetimeColumns": ">= 0"
+        },
+        "pythonScriptSuggestion": "parallel.py",
+        "commonUseCasesTR": "Spider chart'ın Kartezyen koordinat eşdeğeri olarak, özellikleri karşılaştırmak için tercih edilir.",
+        "caveatsTR": [
+          "Çok fazla örneklem gösterilmesi, dağınık ve okunaksız bir 'spagetti grafiği'ne neden olur.",
+          "Örnek çizgilerindeki kesişmeleri önlemek için X eksenindeki değişkenler sıralanmalıdır."
+        ]
+      },
+      {
+        "chartType": "wordcloud",
+        "descriptionTR": "Metin verilerinin görsel temsilidir. Her kelimenin önemi yazı tipi boyutu veya rengi ile gösterilir.",
+        "suitableDataTR": "Metin verileri (kelime listesi ve sıklıkları).",
+        "suitableDataSchema": {
+          "numericColumns": "1",
+          "categoricalColumns": "1"
+        },
+        "pythonScriptSuggestion": "wordcloud.py",
+        "commonUseCasesTR": "En belirgin terimleri hızlıca algılamak.",
+        "caveatsTR": [
+          "Bu görselleştirme türünün kendisi en iyi uygulama değildir.",
+          "Sadece örneklem boyutu çok büyükse kullanışlıdır.",
+          "Bunun yerine yatay bir lollipop plot düşünülebilir."
+        ]
+      }
+    ]
+  },
+  {
+    "category": "part_of_whole_hierarchy",
+    "categoryDescriptionTR": "Hiyerarşik yapıyı, iç içe geçmiş bölümleri veya bir bütünün oranlarını göstermek için kullanılır.",
+    "charts": [
+      {
+        "chartType": "treemap",
+        "descriptionTR": "Hiyerarşik verileri bir dizi iç içe geçmiş dikdörtgen olarak görüntüler. Her grubun alanı değeriyle orantılıdır.",
+        "suitableDataTR": "Hiyerarşik veriler (Gruplar, alt gruplar ve bir değer).",
+        "suitableDataSchema": {
+          "numericColumns": ">= 1",
+          "categoricalColumns": ">= 1"
+        },
+        "pythonScriptSuggestion": "treemap.py",
+        "commonUseCasesTR": "Büyük miktarda veriyi verimli bir şekilde görselleştirmek ve hiyerarşiyi göstermek.",
+        "caveatsTR": [
+          "Hiyerarşinin 3'ten fazla düzeyi etiketlenmemelidir, aksi takdirde çizim okunaksız hale gelir.",
+          "Etkileşimli bir versiyon kullanılması tavsiye edilir."
+        ]
+      },
+      {
+        "chartType": "venn_diagram",
+        "descriptionTR": "Sonlu bir farklı kümeler koleksiyonu arasındaki tüm olası mantıksal ilişkileri gösterir. Çemberin boyutu grubun önemini, kesişim ise ortak noktaları temsil eder.",
+        "suitableDataTR": "İki veya daha fazla bağımsız liste/küme (set) verisi.",
+        "suitableDataSchema": {
+          "numericColumns": ">= 0",
+          "categoricalColumns": ">= 2"
+        },
+        "pythonScriptSuggestion": "venn.py",
+        "commonUseCasesTR": "Liste boyutlarını ve bunların kesişimlerini göstermek.",
+        "caveatsTR": [
+          "3'ten fazla grup görüntülenmemelidir, bu sınırdan sonra çizim okunması çok zorlaşır.",
+          "2 grupla çalışılıyorsa, çember alanları temsil edilen değerlerle orantılı yapılmalıdır.",
+          "Sayılar her alana yazılmalıdır."
+        ]
+      },
+      {
+        "chartType": "pie_chart",
+        "descriptionTR": "Sayısal oranı göstermek için dilimlere ayrılmış dairesel bir grafiktir. Dilimlerin toplamı %100'e eşittir.",
+        "suitableDataTR": "Oranları (proportions) toplanarak %100'e eşit olan veriler.",
+        "suitableDataSchema": {
+          "numericColumns": "1",
+          "categoricalColumns": "1"
+        },
+        "pythonScriptSuggestion": "pie.py",
+        "commonUseCasesTR": "Bir bütünün oranlarını göstermek.",
+        "caveatsTR": [
+          "Kullanılmasından mümkün olduğunca kaçınılmalıdır. (İnsan gözü açıları değerlere çevirmekte kötüdür.)",
+          "3D kullanılmamalıdır.",
+          "Açıklama (legend) kullanılmamalı, her dilim doğrudan etiketlenmelidir.",
+          "Karşılaştırma yapmak için birden fazla pasta grafiği yan yana konulmamalıdır."
+        ]
+      },
+      {
+        "chartType": "doughnut_chart",
+        "descriptionTR": "Merkez alanı kesilmiş bir pie plot'tur. Oranları göstermek için kullanılır ve aynı dezavantajlara sahiptir.",
+        "suitableDataTR": "Oranları toplanarak %100'e eşit olan veriler.",
+        "suitableDataSchema": {
+          "numericColumns": "1",
+          "categoricalColumns": "1"
+        },
+        "pythonScriptSuggestion": "doughnut.py",
+        "commonUseCasesTR": "Oranları göstermek (Pie chart'a bir alternatif, ancak benzer zorluklara sahiptir).",
+        "caveatsTR": [
+          "Çoğu zaman, pie plot'larla aynı nedenlerle kaçınılması daha iyidir.",
+          "3D kullanılmamalıdır.",
+          "Yüzde kullanılıyorsa, toplamın %100 olduğundan emin olun."
+        ]
+      },
+      {
+        "chartType": "dendrogram",
+        "descriptionTR": "Hiyerarşik bir organizasyonu gösteren bir ağ yapısıdır. Kök düğümden başlar ve kenarlar/dallar ile bağlı düğümlere ayrılır.",
+        "suitableDataTR": "Hiyerarşik veri seti veya bireyler arasındaki mesafeyi hesaplamaya olanak tanıyan sayısal matris.",
+        "suitableDataSchema": {
+          "numericColumns": ">= 0",
+          "categoricalColumns": ">= 1"
+        },
+        "pythonScriptSuggestion": "dendrogram.py",
+        "commonUseCasesTR": "Kümeleme sonuçlarını (clustering) veya hiyerarşik yapıyı görselleştirmek.",
+        "caveatsTR": [
+          "Kümeleme algoritması kullanılıyorsa, mesafe hesaplaması ve kümeleme algoritması için hangi metriklerin kullanıldığı anlaşıldığından emin olunmalıdır.",
+          "Uzun etiketlerle yatay versiyonlar daha çok tercih edilir.",
+          "Kümeleme ile çalışılıyorsa heatmap'i göstermek iyi bir uygulamadır."
+        ]
+      }
+    ]
+  },
+  {
+    "category": "evolution",
+    "categoryDescriptionTR": "Genellikle zaman serileri olmak üzere, bir veya birden fazla sayısal değişkenin zaman içindeki evrimini (trendini) gösterir.",
+    "charts": [
+      {
+        "chartType": "line_chart",
+        "descriptionTR": "Bir veya birden fazla sayısal değişkenin evrimini görüntüler. Ölçüm noktaları, sıralı olarak düz çizgilerle birleştirilir.",
+        "suitableDataTR": "Sıralı (ordered) veri, genellikle zaman serisi (bir datetime sütunu).",
+        "suitableDataSchema": {
+          "numericColumns": ">= 1",
+          "categoricalColumns": ">= 0",
+          "datetimeColumns": ">= 1"
+        },
+        "pythonScriptSuggestion": "line.py",
+        "commonUseCasesTR": "Zaman içindeki trendleri görselleştirmek ve verilerdeki değişimleri izlemek.",
+        "caveatsTR": [
+          "Y eksenini kesme tartışmalı bir uygulamadır.",
+          "İki farklı değişkenin evrimini karşılaştırmak için çift eksen (dual axis) kullanılmamalıdır.",
+          "'Spagetti grafiği' (çok fazla çizgi) ile çizimin okunaksız hale gelmemesine dikkat edilmelidir."
+        ]
+      },
+      {
+        "chartType": "area_chart",
+        "descriptionTR": "Bir çizgi grafiğine çok benzer, ancak çizgi ile X ekseni arasındaki alan renk veya gölgeleme ile doldurulur. Tek bir sayısal değişkenin evrimini temsil eder.",
+        "suitableDataTR": "Sıralı (ordered) veri, tek bir sayısal değişken.",
+        "suitableDataSchema": {
+          "numericColumns": "1",
+          "categoricalColumns": ">= 0",
+          "datetimeColumns": ">= 1"
+        },
+        "pythonScriptSuggestion": "area.py",
+        "commonUseCasesTR": "Trendi çizgi grafiğinden daha belirgin hale getirmek.",
+        "caveatsTR": [
+          "Y eksenini kesme konusunda dikkatli olunmalıdır."
+        ]
+      },
+      {
+        "chartType": "stacked_area",
+        "descriptionTR": "Temel alan grafiğinin bir uzantısıdır, aynı grafikte birkaç grubun değerinin evrimini üst üste gösterir.",
+        "suitableDataTR": "Birden fazla grubun zaman içinde evrimi.",
+        "suitableDataSchema": {
+          "numericColumns": "1",
+          "categoricalColumns": "1",
+          "datetimeColumns": ">= 1"
+        },
+        "pythonScriptSuggestion": "stacked_area.py",
+        "commonUseCasesTR": "Toplamdaki evrimi ve her grubun toplam içindeki öneminin evrimini aynı anda kontrol etmek.",
+        "caveatsTR": [
+          "Okunması zor olabilir, küçük çoklu (small multiple) veya çizgi grafiği kullanılması denenebilir.",
+          "Grupların sıralaması (aşağıdan yukarıya) sonucu etkileyebilir, farklı sıralamalar denenmelidir."
+        ]
+      },
+      {
+        "chartType": "streamgraph",
+        "descriptionTR": "Stacked Area chart'ın yumuşak bir versiyonudur. Kenarları yuvarlatılmış ve akış izlenimi veren bir şekle sahiptir.",
+        "suitableDataTR": "Birden fazla grubun zaman içindeki evrimi (akış odaklı).",
+        "suitableDataSchema": {
+          "numericColumns": "1",
+          "categoricalColumns": "1",
+          "datetimeColumns": ">= 1"
+        },
+        "pythonScriptSuggestion": "streamgraph.py",
+        "commonUseCasesTR": "Bütünün göreceli oranlarının incelenmesi (trendleri daha çekici bir şekilde göstermek).",
+        "caveatsTR": [
+          "Her bireysel grubun evrimini incelemek zordur.",
+          "Daha doğru ancak daha az çekici bir çizim için, çizgi grafiği veya small multiple kullanılması düşünülebilir."
+        ]
+      }
+    ]
+  },
+  {
+    "category": "maps",
+    "categoryDescriptionTR": "Coğrafi verileri görselleştirmek ve bölgeler arası değişkenliği göstermek için kullanılır.",
+    "charts": [
+      {
+        "chartType": "background_map",
+        "descriptionTR": "Herhangi bir coğrafi analizin ilk adımı ve temelidir.",
+        "suitableDataTR": "Coğrafi koordinatlar veya bölgesel veriler.",
+        "suitableDataSchema": {
+          "numericColumns": ">= 0",
+          "categoricalColumns": ">= 0",
+          "geospatialData": ">= 1"
+        },
+        "pythonScriptSuggestion": "background_map.py",
+        "commonUseCasesTR": "Diğer harita türleri için temel katmanı oluşturmak.",
+        "caveatsTR": [
+          "Kullanılan coğrafi koordinat projeksiyonu konusunda dikkatli olunmalıdır.",
+          "Bilgi kaynağınız ve kullanılan projeksiyon belirtilmelidir.",
+          "Bariz bir amaç olmaksızın renk kullanılmamalıdır."
+        ]
+      },
+      {
+        "chartType": "choropleth_map",
+        "descriptionTR": "Bölünmüş coğrafi alanları sayısal bir değişkenle ilişkili olarak renklendirir. Her bölge için toplu bir değeri gösterir.",
+        "suitableDataTR": "Coğrafi bölgeler (harita geometrisi) ve her bölge için toplu bir sayısal değer.",
+        "suitableDataSchema": {
+          "numericColumns": "1",
+          "categoricalColumns": ">= 0",
+          "geospatialData": ">= 1"
+        },
+        "pythonScriptSuggestion": "choropleth.py",
+        "commonUseCasesTR": "Bir değişkenin bir bölge boyunca nasıl geliştiğini incelemek.",
+        "caveatsTR": [
+          "Değişken normalize edilmelidir (ham sayılar karşılaştırılamaz).",
+          "Sürekli renk paleti seçimine büyük özen gösterilmelidir.",
+          "Farklı bölge boyutları yanlılık yarattığı için, bunun yerine hexbin haritaları düşünülebilir."
+        ]
+      },
+      {
+        "chartType": "hexbin_map",
+        "descriptionTR": "Coğrafi bir alanı çok sayıda altıgene böler ve her altıgene atanan sayısal değer rengini kontrol eder. Choropleth haritalarındaki bölge boyutu yanlılığını giderir.",
+        "suitableDataTR": "Coğrafi koordinatlar/bölgeler + 1 sayısal değer.",
+        "suitableDataSchema": {
+          "numericColumns": "1",
+          "categoricalColumns": ">= 0",
+          "geospatialData": ">= 1"
+        },
+        "pythonScriptSuggestion": "hexbin.py",
+        "commonUseCasesTR": "Bölge boyutundan kaynaklanan yanlılığı azaltarak coğrafi yoğunluğu göstermek.",
+        "caveatsTR": [
+          "Okuyucu için kafa karıştırıcı olabilir, çünkü normal coğrafi işaretler bulunmaz."
+        ]
+      },
+      {
+        "chartType": "connection_map",
+        "descriptionTR": "Bir harita üzerindeki birkaç konum arasındaki bağlantıyı çizgiler veya yaylar kullanarak gösterir.",
+        "suitableDataTR": "Coğrafi konumlar ve bunlar arasındaki bağlantı/akış verileri.",
+        "suitableDataSchema": {
+          "numericColumns": ">= 0",
+          "categoricalColumns": ">= 0",
+          "geospatialData": ">= 1"
+        },
+        "pythonScriptSuggestion": "connection.py",
+        "commonUseCasesTR": "Göç akışlarını, ticaret yollarını veya düğümler arası bağlantıları görselleştirmek.",
+        "caveatsTR": [
+          "Çok sayıda bağlantı gösteriliyorsa, çizim sırası önemlidir.",
+          "Düz çizgiler yerine 'büyük daire' (great circle) kullanılması tavsiye edilir."
+        ]
+      },
+      {
+        "chartType": "bubble_map",
+        "descriptionTR": "Bir bölge üzerindeki sayısal bir değeri temsil etmek için farklı boyutlarda daireler (kabarcıklar) kullanır. Choropleth'in bölge boyutu yanlılığını önler.",
+        "suitableDataTR": "Coğrafi koordinatlar/bölgeler + 1 Sayısal Değer (Kabarcık Boyutu).",
+        "suitableDataSchema": {
+          "numericColumns": "1",
+          "categoricalColumns": ">= 0",
+          "geospatialData": ">= 1"
+        },
+        "pythonScriptSuggestion": "bubble_map.py",
+        "commonUseCasesTR": "Coğrafi bir bölge üzerinde nicel değişkenleri görselleştirmek.",
+        "caveatsTR": [
+          "Sayısal değişkeni kabarcık çapına değil, kabarcık alanına (area) eşleyin.",
+          "Kabarcıklar üst üste binerse şeffaflık kullanın.",
+          "Kabarcık boyutunun anlamını anlamak için bir gösterge görüntüleyin veya her kabarcığı etiketleyin."
+        ]
+      }
+    ]
+  },
+  {
+    "category": "flow_network",
+    "categoryDescriptionTR": "Varlıklar arasındaki akışları, bağlantıları veya ağ yapılarını gösteren grafikler.",
+    "charts": [
+      {
+        "chartType": "sankey_diagram",
+        "descriptionTR": "Akışları görüntülemeye olanak tanıyan görselleştirme tekniğidir. Bağlantılar, akışın önemiyle orantılı genişlikte oklar veya yaylarla temsil edilir.",
+        "suitableDataTR": "Akış verileri (Kaynak düğüm, Hedef düğüm ve Akış miktarı).",
+        "suitableDataSchema": {
+          "numericColumns": "1",
+          "categoricalColumns": ">= 2"
+        },
+        "pythonScriptSuggestion": "sankey.py",
+        "commonUseCasesTR": "Enerji akışları, maliyet akışları veya bir süreç boyunca değerlerin nasıl hareket ettiğini göstermek.",
+        "caveatsTR": [
+          "Düğüm konumu önemlidir: bağlantılar arasındaki geçiş sayısını en aza indirin.",
+          "Aşırı dağınıklığı önlemek için zayıf bağlantılar çıkarılmalıdır."
+        ]
+      },
+      {
+        "chartType": "network_diagram",
+        "descriptionTR": "Bir dizi varlık (düğümler) arasındaki ara bağlantıları (bağlantılar/kenarlar) gösterir.",
+        "suitableDataTR": "Düğüm ve kenar listeleri (Node/Edge list) içeren bağlantı verileri.",
+        "suitableDataSchema": {
+          "numericColumns": ">= 0",
+          "categoricalColumns": ">= 0"
+        },
+        "pythonScriptSuggestion": "network.py",
+        "commonUseCasesTR": "Sosyal ağlar, internet bağlantıları veya herhangi bir varlık kümesi arasındaki ilişkileri göstermek.",
+        "caveatsTR": [
+          "Çok fazla bağlantı ve belirgin bir örüntü olmadığında çizim dağınık ve okunaksız hale gelir ('hairball' oluşumu)."
+        ]
+      },
+      {
+        "chartType": "chord_diagram",
+        "descriptionTR": "Birkaç varlık (düğüm) arasındaki akışları veya bağlantıları gösteren dairesel bir çizimdir. Yayın boyutu akışın önemiyle orantılıdır.",
+        "suitableDataTR": "Bağlantı/Akış verileri.",
+        "suitableDataSchema": {
+          "numericColumns": "1",
+          "categoricalColumns": ">= 2"
+        },
+        "pythonScriptSuggestion": "chord.py",
+        "commonUseCasesTR": "Varlıklar arasındaki ikili ilişkilerin ve akış büyüklüğünün görselleştirilmesi.",
+        "caveatsTR": [
+          "Daire etrafındaki grupların sırası önemlidir, kesişen yay sayısını en aza indirmek daha iyidir.",
+          "Hızla dağınık ve okunaksız hale gelebilir, aşırı dağınıklığa dikkat edin."
+        ]
+      },
+      {
+        "chartType": "arc_diagram",
+        "descriptionTR": "Düğümlerin tek bir eksen boyunca hizalandığı ve bağlantıların yaylarla temsil edildiği özel bir ağ grafiği türüdür.",
+        "suitableDataTR": "Sıralanmış düğümler içeren bağlantı verileri.",
+        "suitableDataSchema": {
+          "numericColumns": ">= 0",
+          "categoricalColumns": ">= 1"
+        },
+        "pythonScriptSuggestion": "arc.py",
+        "commonUseCasesTR": "Düğümlerin genel yapısını iletmez, ancak düğüm sırası doğru seçilirse kümeleri ve köprüleri vurgulayabilir.",
+        "caveatsTR": [
+          "Anlamlı bir yay diyagramı için en iyi düğüm sırasını bulmak anahtardır."
+        ]
+      }
+    ]
+  }
+]

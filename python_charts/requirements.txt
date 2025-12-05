@@ -1,0 +1,10 @@
+pandas
+matplotlib
+seaborn
+openpyxl
+squarify
+networkx
+wordcloud
+folium
+geopandas
+plotly

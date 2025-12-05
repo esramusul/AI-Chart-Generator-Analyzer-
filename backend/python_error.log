@@ -1,0 +1,9 @@
+Time: 2025-12-05T21:08:04.052Z
+Script: histogram.py
+Args: {"x":"","y":"","group":"","output":"C:\\Users\\Monster\\OneDrive\\Desktop\\ödev\\backend\\outputs\\chart-1764968882841.png"}
+Error: usage: histogram.py [-h] --input INPUT --output OUTPUT [--x X] [--y Y]
+                    [--group GROUP] [--size SIZE] [--color COLOR]
+histogram.py: error: the following arguments are required: --input
+
+Output: 
+
