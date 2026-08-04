@@ -1,63 +1,50 @@
-# 🚀 ai-chart-generator-analyzer
+# AI Chart Generator & Analyzer
 
-This repository contains project source code and assets.
+A full-stack application that leverages DataViz knowledge to suggest, render, and animate charts, as well as identify charts from images.
 
----
+## Project Structure
+- `backend/`: Node.js Express server.
+- `frontend/`: React + Vite + Tailwind application.
+- `python_charts/`: Python scripts for generating visualizations.
 
-## 📌 Project Overview
+## Prerequisites
+- Node.js (v18+)
+- Python (v3.9+)
+- FFmpeg (must be in system PATH for video generation)
 
-- **Developer:** [esramusul](https://github.com/esramusul)
-- **Tech Stack:** `JavaScript`
-- **Primary Language:** `JavaScript`
-- **Created Date:** 2025-12-05
-- **Default Branch:** `main`
-- **License:** Not specified
+## Setup
 
----
-
-## 📁 Repository Structure
-
-```text
-ai-chart-generator-analyzer/
-├── README.md
-├── backend
-├── demo_chart.png
-├── demo_data.csv
-├── frontend
-├── python_charts
-```
-
----
-
-## ⚙️ Getting Started
-
-### 1. Clone the Repository
+### 1. Backend
 ```bash
-git clone https://github.com/esramusul/ai-chart-generator-analyzer.git
-cd ai-chart-generator-analyzer
+cd backend
+npm install
+npm start
 ```
+Server runs on [http://localhost:3000](http://localhost:3000).
 
-### 2. Install Dependencies
+### 2. Python Environment
+Install the required python packages:
 ```bash
-Install dependencies using your project package manager.
+pip install -r python_charts/requirements.txt
 ```
+*Note: Ensure `python` command is available in your terminal.*
 
-### 3. Run the Project
+### 3. Frontend
 ```bash
-Run the main entry point file of the application.
+cd frontend
+npm install
+npm run dev
 ```
+Open the URL shown (usually [http://localhost:5173](http://localhost:5173)).
 
----
+## Usage
+1. **Upload Data**: Go to home page, upload a CSV or Excel file.
+2. **Select Chart**: Based on your data schema, suitable chart types (from `chartKnowledge.json`) are suggested.
+3. **Configure**: Choose columns for X, Y, or Groupings.
+4. **Render**: Click "Render Chart" to see the Python-generated PNG.
+5. **Video**: Click "Generate Video" to create a short MP4 presentation of your chart.
+6. **Analyzer**: Use the "Analyze an existing chart" link to upload an image and let the AI guess the chart type.
 
-## 🤝 Contributing
-
-Contributions, issues, and feature requests are welcome!
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'feat: Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
----
-
-*Automatically generated and maintained with [GitHub Smart README Updater](https://github.com/).*
+## Modifications
+- Edit `backend/chartKnowledge.json` to adjust suggestion rules or descriptions.
+- Edit scripts in `python_charts/` to customize visual styles.
